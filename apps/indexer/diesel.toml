@@ -1,0 +1,7 @@
+# Diesel configuration. Schema is regenerated from the DB with:
+#   diesel print-schema > src/schema.rs
+[print_schema]
+file = "src/schema.rs"
+
+[migrations_directory]
+dir = "migrations"

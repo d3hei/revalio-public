@@ -1,0 +1,22 @@
+{
+  "0x08beed3ebf0b5620ab5ea33be9ccd87e7b1ef590834fe3b7ac71e40c3f679ed1": {
+    "label": "Cetus CLMM whale",
+    "protocols": ["Cetus"]
+  },
+  "0xb973681698db4e9fc7b27dff7b8c5ae2323728f5e1ccfb1380f6592972c3cf91": {
+    "label": "Turbos LP (spot-priced)",
+    "protocols": ["Turbos"]
+  },
+  "0xdcd6463180d8a36ebfd3e30ce2ebac8e2a3bbad8d22a30976be917050e7bd139": {
+    "label": "NAVI supplier (discovered)",
+    "protocols": ["Navi"]
+  },
+  "0x67cf8792f7c029af45ab26c6becb5000f34cc57fcf413e30943523eac553dca8": {
+    "label": "Native SUI staking + Navi DEEP",
+    "protocols": ["sui-system", "Navi"]
+  },
+  "0x65cfe14bdf5fdcba512a2f20586c2738f8d2e2e277e3fdb880619ed2b4edf73d": {
+    "label": "Scallop sCoin supply",
+    "protocols": ["Scallop"]
+  }
+}

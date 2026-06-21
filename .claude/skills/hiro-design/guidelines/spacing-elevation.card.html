@@ -1,0 +1,27 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Elevation" subtitle="Restrained soft shadows + the hard 'developer' offset" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--bg-paper); font-family: var(--font-mono); }
+  .wrap { padding: 30px 32px; display: flex; gap: 34px; align-items: center; }
+  .item { display:flex; flex-direction: column; gap: 14px; align-items: center; }
+  .box { width: 92px; height: 66px; background: var(--hiro-white); border-radius: var(--radius-sm); }
+  .b1 { box-shadow: var(--shadow-sm); }
+  .b2 { box-shadow: var(--shadow-md); }
+  .b3 { box-shadow: var(--shadow-lg); }
+  .b4 { box-shadow: var(--shadow-hard); border: 1px solid var(--hiro-ink); }
+  .lbl { font-size: 10px; color: var(--text-muted); letter-spacing: var(--ls-label); text-transform: uppercase; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="item"><div class="box b1"></div><div class="lbl">sm</div></div>
+    <div class="item"><div class="box b2"></div><div class="lbl">md</div></div>
+    <div class="item"><div class="box b3"></div><div class="lbl">lg</div></div>
+    <div class="item"><div class="box b4"></div><div class="lbl">hard</div></div>
+  </div>
+</body>
+</html>

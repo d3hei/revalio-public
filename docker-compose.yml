@@ -1,0 +1,185 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: revalio-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-revalio}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-revalio}
+      POSTGRES_DB: ${POSTGRES_DB:-revalio}
+    ports:
+      # Bind to localhost only — not reachable from other devices on the LAN.
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Schema is owned by the indexer's Diesel migrations (applied on startup),
+      # so no initdb mount here — avoids two competing sources of truth.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-revalio} -d ${POSTGRES_DB:-revalio}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: revalio-redis
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:6379:6379"
+    command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  adminer:
+    image: adminer:4
+    container_name: revalio-adminer
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - postgres
+
+  # --- Application services (opt-in via the "app" profile) ---
+  # Plain `docker compose up` runs infra only (postgres/redis/adminer).
+  # `docker compose --profile app up -d --build` brings up the full stack.
+  # NOTE: the database schema is owned by the Rust indexer's migrations, so run
+  # the indexer at least once (apps/indexer/run-live.ps1) to create the schema
+  # before the API endpoints return data.
+  api:
+    profiles: ["app"]
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: revalio-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      API_HOST: 0.0.0.0
+      API_PORT: "3001"
+      DATABASE_URL: postgres://${POSTGRES_USER:-revalio}:${POSTGRES_PASSWORD:-revalio}@postgres:5432/${POSTGRES_DB:-revalio}
+      REDIS_URL: redis://redis:6379
+      SUI_NETWORK: ${SUI_NETWORK:-testnet}
+      SUI_RPC_URL: ${SUI_RPC_URL:-https://fullnode.testnet.sui.io:443}
+      SUI_DEFI_RPC_URL: ${SUI_DEFI_RPC_URL:-https://cetus-mainnet-endpoint.blockvision.org}
+      SUI_DEFI_RPC_FALLBACKS: ${SUI_DEFI_RPC_FALLBACKS:-https://fullnode.mainnet.sui.io:443,https://rpc-mainnet.suiscan.xyz:443,https://cetus-suimain-e31f.mainnet.sui.rpcpool.com}
+      PYTH_HERMES_URL: ${PYTH_HERMES_URL:-https://hermes.pyth.network}
+      COINGECKO_API_BASE: ${COINGECKO_API_BASE:-https://api.coingecko.com/api/v3}
+      BLOCKVISION_API_KEY: ${BLOCKVISION_API_KEY:-}
+      BLOCKVISION_API_BASE: ${BLOCKVISION_API_BASE:-https://api.blockvision.org/v2}
+      BLOCKVISION_PROTOCOLS: ${BLOCKVISION_PROTOCOLS:-}
+    ports:
+      - "127.0.0.1:${API_PORT:-3001}:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        ["CMD", "node", "-e", "fetch('http://localhost:3001/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  web:
+    profiles: ["app"]
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    container_name: revalio-web
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8088}:80"
+    depends_on:
+      - api
+
+  # --- Mainnet indexer (opt-in via "indexer-mainnet"; separate watermark) ---
+  indexer-mainnet:
+    profiles: ["indexer-mainnet"]
+    build:
+      context: .
+      dockerfile: apps/indexer/Dockerfile
+    container_name: revalio-indexer-mainnet
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-revalio}:${POSTGRES_PASSWORD:-revalio}@postgres:5432/${POSTGRES_DB:-revalio}
+      SUI_RPC_URL: ${SUI_INDEXER_RPC_URL:-https://fullnode.mainnet.sui.io:443}
+      SUI_FIRST_CHECKPOINT: ${SUI_MAINNET_FIRST_CHECKPOINT:-}
+      RUST_LOG: ${RUST_LOG:-info,sui_indexer_alt_framework::metrics=error}
+    command:
+      - /bin/sh
+      - -c
+      - |
+        set -e
+        ARGS="--rpc-api-url $$SUI_RPC_URL"
+        if [ -n "$$SUI_FIRST_CHECKPOINT" ]; then
+          ARGS="$$ARGS --first-checkpoint $$SUI_FIRST_CHECKPOINT"
+        fi
+        echo "Starting mainnet indexer: revalio-indexer-mainnet $$ARGS"
+        exec revalio-indexer $$ARGS
+    ports:
+      - "127.0.0.1:9185:9184"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # --- Indexer (opt-in via the "indexer" profile; heavy Rust build) ---
+  # Applies the Diesel migrations on startup (creating the schema) and then
+  # follows the chain tip continuously, resuming from the stored watermark.
+  # On a FRESH database set SUI_FIRST_CHECKPOINT for the first run; afterwards
+  # it resumes automatically. `restart: unless-stopped` covers transient crashes.
+  indexer:
+    profiles: ["indexer"]
+    build:
+      context: .
+      dockerfile: apps/indexer/Dockerfile
+    container_name: revalio-indexer
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-revalio}:${POSTGRES_PASSWORD:-revalio}@postgres:5432/${POSTGRES_DB:-revalio}
+      SUI_RPC_URL: ${SUI_RPC_URL:-https://fullnode.testnet.sui.io:443}
+      SUI_FIRST_CHECKPOINT: ${SUI_FIRST_CHECKPOINT:-}
+      RUST_LOG: ${RUST_LOG:-info,sui_indexer_alt_framework::metrics=error}
+    command:
+      - /bin/sh
+      - -c
+      - |
+        set -e
+        ARGS="--rpc-api-url $$SUI_RPC_URL"
+        if [ -n "$$SUI_FIRST_CHECKPOINT" ]; then
+          ARGS="$$ARGS --first-checkpoint $$SUI_FIRST_CHECKPOINT"
+        fi
+        echo "Starting indexer: revalio-indexer $$ARGS"
+        exec revalio-indexer $$ARGS
+    ports:
+      - "127.0.0.1:9184:9184"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # --- Observability (opt-in via the "obs" profile) ---
+  # Scrapes the API (compose network) and the native indexer (host :9184).
+  # Run together with the app: `docker compose --profile app --profile obs up -d`.
+  prometheus:
+    profiles: ["obs"]
+    image: prom/prometheus:v2.55.1
+    container_name: revalio-prometheus
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=7d"
+    volumes:
+      - ./infra/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - promdata:/prometheus
+    ports:
+      - "127.0.0.1:9090:9090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  pgdata:
+  promdata:

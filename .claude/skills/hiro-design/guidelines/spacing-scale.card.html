@@ -1,0 +1,26 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Spacing Scale" subtitle="4px base · 1–10 steps" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--bg-canvas); font-family: var(--font-mono); }
+  .wrap { padding: 22px 24px; display: flex; gap: 14px; align-items: flex-end; }
+  .item { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .bar { background: var(--accent); width: 100%; }
+  .box { display:flex; align-items:flex-end; height: 80px; }
+  .n { font-size: 11px; color: var(--text-strong); }
+  .px { font-size: 10px; color: var(--text-faint); }
+</style>
+</head>
+<body>
+  <div class="wrap" id="w"></div>
+  <script>
+    const steps = [[1,4],[2,8],[3,12],[4,16],[5,24],[6,32],[7,48],[8,64]];
+    document.getElementById('w').innerHTML = steps.map(([n,px]) =>
+      `<div class="item"><div class="box"><div class="bar" style="height:${px}px;width:${Math.max(px/2,10)}px"></div></div><div class="n">${n}</div><div class="px">${px}</div></div>`
+    ).join('');
+  </script>
+</body>
+</html>

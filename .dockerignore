@@ -1,0 +1,20 @@
+# Keep the build context small and reproducible. The context is the repo root
+# (so the pnpm workspace lockfile is available), but most of the tree is noise.
+**/node_modules
+**/dist
+**/.turbo
+**/.vite
+
+# Rust indexer build output is multi-GB and never needed in JS images.
+apps/indexer/target
+
+# VCS / editor / local env
+.git
+.gitignore
+**/.env
+**/.env.*
+!**/.env.example
+**/*.log
+
+# Docs/infra not needed inside the JS images
+**/.DS_Store

@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS price_ticks;
+DROP TABLE IF EXISTS positions;
+DROP TABLE IF EXISTS transactions;
+DROP TABLE IF EXISTS balances;
+DROP TABLE IF EXISTS coin_objects;
+DROP TABLE IF EXISTS objects;
+DROP TABLE IF EXISTS coins;

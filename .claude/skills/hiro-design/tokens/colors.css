@@ -1,0 +1,70 @@
+/* ============================================================
+   Hiro — Color tokens
+   White canvas, near-black ink, Hiro/Stacks violet primary,
+   Bitcoin orange as the secondary "layer" accent.
+   (Hex values inferred — see readme CAVEATS.)
+   ============================================================ */
+:root {
+  /* —— Base palette —————————————————————————— */
+  --hiro-white:        #FFFFFF;
+  --hiro-paper:        #F6F5F1;   /* warm off-white surface  */
+  --hiro-paper-2:      #EDEBE4;   /* deeper paper / hover     */
+  --hiro-line:         #E3E1D8;   /* hairline on paper        */
+
+  --hiro-ink:          #0C0C0D;   /* near-black foreground    */
+  --hiro-ink-2:        #2B2B2E;   /* strong secondary text    */
+  --hiro-gray:         #6B6B70;   /* muted text / captions    */
+  --hiro-gray-2:       #9A9A9E;   /* faint text / disabled    */
+  --hiro-line-dark:    #26262A;   /* hairline on dark         */
+
+  /* —— Brand —————————————————————————————————— */
+  --hiro-violet:       #5546FF;   /* primary brand / action   */
+  --hiro-violet-700:   #3F31E0;   /* pressed / deep           */
+  --hiro-violet-300:   #B7AFFF;   /* tint                     */
+  --hiro-violet-50:    #ECEAFF;   /* wash                     */
+
+  --hiro-orange:       #F7931A;   /* Bitcoin orange — accent  */
+  --hiro-orange-600:   #D97908;
+  --hiro-orange-50:    #FDF0DC;
+
+  /* —— Semantic status ———————————————————————— */
+  --hiro-green:        #1E9E5A;   /* success / "all normal"   */
+  --hiro-green-50:     #E2F4EA;
+  --hiro-red:          #D8412F;   /* error                    */
+  --hiro-red-50:       #FBE7E4;
+  --hiro-yellow:       #E2B007;   /* warning / beta           */
+  --hiro-yellow-50:    #FBF2D4;
+
+  /* —— Dark surface (terminal panels) ——————————— */
+  --hiro-black:        #0C0C0D;
+  --hiro-black-2:      #161618;   /* raised panel             */
+  --hiro-black-3:      #1F1F22;   /* hover on dark            */
+
+  /* ============================================================
+     Semantic aliases — reference these in components
+     ============================================================ */
+  --bg-canvas:         var(--hiro-white);
+  --bg-paper:          var(--hiro-paper);
+  --bg-sunken:         var(--hiro-paper-2);
+  --surface-card:      var(--hiro-white);
+  --surface-terminal:  var(--hiro-black);
+  --surface-terminal-2:var(--hiro-black-2);
+
+  --text-strong:       var(--hiro-ink);
+  --text-body:         var(--hiro-ink-2);
+  --text-muted:        var(--hiro-gray);
+  --text-faint:        var(--hiro-gray-2);
+  --text-on-dark:      #EDEDE7;
+  --text-on-accent:    var(--hiro-white);
+
+  --border-subtle:     var(--hiro-line);
+  --border-strong:     var(--hiro-ink);
+  --border-dark:       var(--hiro-line-dark);
+
+  --accent:            var(--hiro-violet);
+  --accent-press:      var(--hiro-violet-700);
+  --accent-wash:       var(--hiro-violet-50);
+  --accent-alt:        var(--hiro-orange);
+
+  --focus-ring:        var(--hiro-violet);
+}

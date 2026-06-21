@@ -1,0 +1,26 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Semantic Status" subtitle="Success, warning, error with washes" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-mono); background: var(--bg-canvas); }
+  .row { display: flex; gap: 14px; padding: 20px; }
+  .sw { flex: 1; }
+  .chip { height: 76px; border-radius: var(--radius-sm); display:flex; align-items:flex-end; padding:8px; }
+  .chip span { font-size:11px; }
+  .name { font-size: 11px; letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-strong); margin-top: 10px; }
+  .hex { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:var(--hiro-green)"></div><div class="name">Green</div><div class="hex">#1E9E5A</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-green-50)"></div><div class="name">Green 50</div><div class="hex">#E2F4EA</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-yellow)"></div><div class="name">Yellow</div><div class="hex">#E2B007</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-red)"></div><div class="name">Red</div><div class="hex">#D8412F</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-red-50)"></div><div class="name">Red 50</div><div class="hex">#FBE7E4</div></div>
+  </div>
+</body>
+</html>

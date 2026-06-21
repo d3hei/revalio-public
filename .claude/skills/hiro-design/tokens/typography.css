@@ -1,0 +1,47 @@
+/* ============================================================
+   Hiro — Typography tokens
+   Space Grotesk for display/UI, Space Mono for labels/code.
+   Hiro's voice leans on UPPERCASE mono eyebrows + big bold
+   grotesque headlines.
+   ============================================================ */
+:root {
+  /* —— Families ——————————————————————————————— */
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --font-display: var(--font-sans);
+  --font-body:    var(--font-sans);
+  --font-label:   var(--font-mono);  /* eyebrows, tags, UI chrome */
+  --font-code:    var(--font-mono);
+
+  /* —— Weights ———————————————————————————————— */
+  --fw-regular: 400;  /* @kind font */
+  --fw-medium:  500;  /* @kind font */
+  --fw-semibold:600;  /* @kind font */
+  --fw-bold:    700;  /* @kind font */
+
+  /* —— Type scale (rem) ———————————————————————— */
+  --fs-display: 5.5rem;    /* 88px — hero "BUILD ON BITCOIN"   */
+  --fs-h1:      3.5rem;    /* 56px                              */
+  --fs-h2:      2.5rem;    /* 40px                              */
+  --fs-h3:      1.75rem;   /* 28px                              */
+  --fs-h4:      1.25rem;   /* 20px                              */
+  --fs-lg:      1.125rem;  /* 18px lead body                    */
+  --fs-body:    1rem;      /* 16px                              */
+  --fs-sm:      0.875rem;  /* 14px                              */
+  --fs-xs:      0.75rem;   /* 12px label / mono eyebrow         */
+  --fs-2xs:     0.6875rem; /* 11px micro mono                   */
+
+  /* —— Line heights ———————————————————————————— */
+  --lh-tight:   0.95;  /* @kind font */
+  --lh-snug:    1.1;   /* @kind font */
+  --lh-normal:  1.45;  /* @kind font */
+  --lh-relaxed: 1.6;   /* @kind font */
+
+  /* —— Letter spacing —————————————————————————— */
+  --ls-display: -0.03em;   /* @kind font */
+  --ls-tight:   -0.015em;  /* @kind font */
+  --ls-normal:  0;         /* @kind font */
+  --ls-label:   0.08em;    /* @kind font */
+  --ls-wide:    0.14em;    /* @kind font */
+}

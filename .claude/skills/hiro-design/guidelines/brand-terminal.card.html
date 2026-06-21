@@ -1,0 +1,31 @@
+<!-- @dsCard group="Brand" viewport="700x250" name="Terminal & Tree" subtitle="The signature CLI / file-tree motif" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--bg-canvas); font-family: var(--font-mono); }
+  .wrap { padding: 22px 26px; }
+  .term { background: var(--surface-terminal); border-radius: var(--radius-md); padding: 16px 18px; color: var(--text-on-dark); font-size: 13px; line-height: 1.7; }
+  .bar { display:flex; gap: 7px; margin-bottom: 12px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #3a3a3e; }
+  .cmt { color: var(--hiro-gray); }
+  .fn  { color: var(--hiro-violet-300); }
+  .br  { color: var(--hiro-orange); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="term">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <div>$ <span class="fn">tree</span> path/hiro</div>
+      <div><span class="br">└──</span> stacks</div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="br">├──</span> hiro-platform&nbsp;&nbsp;<span class="cmt"># write & deploy contracts from your browser</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="br">├──</span> chainhook&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt"># react to onchain events (IFTTT)</span></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="br">└──</span> stacks-api&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt"># query the blockchain via REST</span></div>
+      <div class="cmt" style="margin-top:8px">1 directory, 2 apis, 2 tools</div>
+    </div>
+  </div>
+</body>
+</html>

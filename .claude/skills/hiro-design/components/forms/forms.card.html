@@ -1,0 +1,43 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Forms" subtitle="Input, checkbox, toggle with mono labels" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; background: var(--bg-canvas); }
+  #root { padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 28px; align-items: start; }
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+</style>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Input, Checkbox, Toggle } = window.HiroDesignSystem_318aec;
+  function Demo() {
+    const [a, setA] = React.useState(true);
+    const [b, setB] = React.useState(false);
+    const [t, setT] = React.useState(true);
+    return (
+      <>
+        <div className="stack">
+          <Input label="Email" placeholder="you@domain.com" hint="Product updates only." />
+          <Input label="Contract" prefix="$" mono defaultValue="counter.clar" />
+        </div>
+        <div className="stack">
+          <Input label="Principal" error="Invalid Stacks address" defaultValue="SP3FBR..." />
+          <Checkbox checked={a} label="I agree to the privacy policy" onChange={() => setA(!a)} />
+          <Checkbox checked={b} label="Subscribe to the newsletter" onChange={() => setB(!b)} />
+          <Toggle checked={t} label="Mainnet" onChange={() => setT(!t)} />
+        </div>
+      </>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

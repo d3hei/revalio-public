@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Ink & Neutrals" subtitle="Near-black foreground through muted grays" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-mono); background: var(--bg-canvas); }
+  .row { display: flex; gap: 14px; padding: 20px; }
+  .sw { flex: 1; }
+  .chip { height: 76px; border-radius: var(--radius-sm); border: 1px solid rgba(0,0,0,0.06); }
+  .name { font-size: 11px; letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-strong); margin-top: 10px; }
+  .hex { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:var(--hiro-ink)"></div><div class="name">Ink</div><div class="hex">#0C0C0D</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-ink-2)"></div><div class="name">Ink 2</div><div class="hex">#2B2B2E</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-gray)"></div><div class="name">Gray</div><div class="hex">#6B6B70</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-gray-2)"></div><div class="name">Gray 2</div><div class="hex">#9A9A9E</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-line)"></div><div class="name">Line</div><div class="hex">#E3E1D8</div></div>
+  </div>
+</body>
+</html>

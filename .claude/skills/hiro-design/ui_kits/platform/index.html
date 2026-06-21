@@ -1,0 +1,47 @@
+<!-- @dsCard group="Platform" viewport="1280x720" name="Hiro Platform — browser IDE" subtitle="Projects dashboard → Clarity editor, devnet console & deploy" -->
+<!-- @startingPoint section="Platform" subtitle="Hiro Platform browser IDE" viewport="1280x720" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hiro Platform</title>
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--surface-terminal); }
+  #root, .app { height: 100vh; }
+</style>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="PlatformShell.jsx"></script>
+<script type="text/babel" src="PlatformProjects.jsx"></script>
+<script type="text/babel" src="PlatformEditor.jsx"></script>
+<script type="text/babel" data-presets="react">
+  function App() {
+    const [project, setProject] = React.useState(null);
+    const [network, setNetwork] = React.useState('Devnet');
+    const [file, setFile] = React.useState('counter.clar');
+    return (
+      <div className="app" style={{ display: 'flex', flexDirection: 'column' }}>
+        <PlatformTopBar project={project} network={network} setNetwork={setNetwork} onHome={() => setProject(null)} />
+        {project ? (
+          <div style={{ flex: 1, display: 'flex', minHeight: 0 }}>
+            <PlatformSidebar active={file} files={['counter.clar', 'utils.clar']} openFile={setFile} />
+            <PlatformEditor network={network} />
+          </div>
+        ) : (
+          <PlatformProjects openProject={setProject} />
+        )}
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "name": "revalio",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Lightweight portfolio tracker and analytics dashboard for the Sui blockchain",
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "dev:api": "pnpm --filter @revalio/api dev",
+    "dev:web": "pnpm --filter @revalio/web dev",
+    "dev:lab": "pnpm --filter @revalio/web dev:lab",
+    "dev:bolt": "pnpm --filter @revalio/web dev:bolt",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "app:up": "docker compose --profile app up -d --build",
+    "app:down": "docker compose --profile app down",
+    "app:logs": "docker compose --profile app logs -f api web",
+    "obs:up": "docker compose --profile app --profile obs up -d --build",
+    "obs:down": "docker compose --profile app --profile obs down",
+    "indexer:up": "docker compose --profile indexer up -d --build",
+    "indexer:down": "docker compose --profile indexer down",
+    "indexer-mainnet:up": "docker compose --profile indexer-mainnet up -d --build",
+    "indexer-mainnet:down": "docker compose --profile indexer-mainnet down",
+    "stack:up": "docker compose --profile app --profile indexer --profile obs up -d --build",
+    "stack:down": "docker compose --profile app --profile indexer --profile obs down"
+  }
+}

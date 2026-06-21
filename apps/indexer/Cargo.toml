@@ -1,0 +1,42 @@
+[package]
+name = "revalio-indexer"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+# Official Mysten indexing framework (pulls sui types, ingestion, pipeline infra).
+# Tracks the testnet branch, matching our development network.
+sui-indexer-alt-framework = { git = "https://github.com/MystenLabs/sui.git", branch = "testnet" }
+
+# Async runtime
+tokio = { version = "1.0", features = ["full"] }
+
+# Error handling
+anyhow = "1.0"
+
+# Diesel (PostgreSQL) + async support, used by the framework's Db store.
+# Versions must match sui-indexer-alt-framework (testnet): diesel-async 0.9 -> diesel 2.3.x.
+# `numeric` maps Postgres NUMERIC <-> bigdecimal::BigDecimal (coin balances are NUMERIC(78,0)).
+# `serde_json` maps Postgres JSONB <-> serde_json::Value (position `details`).
+diesel = { version = "2.3", features = ["postgres", "r2d2", "numeric", "serde_json"] }
+diesel-async = { version = "0.9", features = ["bb8", "postgres", "async-connection-wrapper"] }
+diesel_migrations = "2.3"
+
+# Arbitrary-precision decimals for on-chain coin balances (NUMERIC(78,0)).
+bigdecimal = "0.4"
+
+# JSON for position `details` (JSONB column).
+serde_json = "1.0"
+
+# Async traits for Processor/Handler impls.
+async-trait = "0.1"
+
+# URL parsing for the database URL.
+url = "2.0"
+
+# Load DATABASE_URL from .env.
+dotenvy = "0.15"
+
+# CLI args (the framework's IndexerCluster consumes clap-parsed Args).
+clap = { version = "4.0", features = ["derive"] }

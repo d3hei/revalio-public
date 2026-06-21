@@ -1,0 +1,41 @@
+<!-- @dsCard group="Website" viewport="1280x760" name="Marketing site — hiro.so" subtitle="Hero, product explorer (bento/tree/featured), updates, footer" -->
+<!-- @startingPoint section="Website" subtitle="Hiro marketing homepage" viewport="1280x900" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hiro — Developer tools for Bitcoin layers</title>
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg-canvas); }
+  ::selection { background: var(--accent-wash); }
+</style>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="SiteNav.jsx"></script>
+<script type="text/babel" src="SiteHero.jsx"></script>
+<script type="text/babel" src="ProductExplorer.jsx"></script>
+<script type="text/babel" src="SiteUpdates.jsx"></script>
+<script type="text/babel" data-presets="react">
+  function App() {
+    return (
+      <>
+        <SiteNav />
+        <SiteHero />
+        <ProductExplorer />
+        <SiteUpdates />
+        <SiteFooter />
+      </>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

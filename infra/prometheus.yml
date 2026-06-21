@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+
+scrape_configs:
+  # Fastify API (runs inside the compose network under the "app" profile).
+  - job_name: revalio-api
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["api:3001"]
+
+  # Rust indexer metrics (sui-indexer-alt on :9184). Two possible locations,
+  # whichever you run — the other simply shows as "down":
+  #   * containerized (indexer profile): reachable as `indexer:9184`
+  #   * native (run-live.ps1):           reachable via host.docker.internal:9184
+  - job_name: revalio-indexer
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["indexer:9184", "indexer-mainnet:9184", "host.docker.internal:9184"]

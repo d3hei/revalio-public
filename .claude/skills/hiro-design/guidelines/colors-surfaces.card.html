@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Surfaces" subtitle="Warm paper canvas + dark terminal panels" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-mono); background: var(--bg-canvas); }
+  .row { display: flex; gap: 14px; padding: 20px; }
+  .sw { flex: 1; }
+  .chip { height: 76px; border-radius: var(--radius-sm); border: 1px solid var(--hiro-line); }
+  .name { font-size: 11px; letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-strong); margin-top: 10px; }
+  .hex { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:var(--hiro-white)"></div><div class="name">White</div><div class="hex">#FFFFFF</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-paper)"></div><div class="name">Paper</div><div class="hex">#F6F5F1</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-paper-2)"></div><div class="name">Sunken</div><div class="hex">#EDEBE4</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-black-2);border-color:var(--hiro-line-dark)"></div><div class="name">Panel</div><div class="hex">#161618</div></div>
+    <div class="sw"><div class="chip" style="background:var(--hiro-black);border-color:var(--hiro-line-dark)"></div><div class="name">Terminal</div><div class="hex">#0C0C0D</div></div>
+  </div>
+</body>
+</html>

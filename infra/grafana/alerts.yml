@@ -1,0 +1,19 @@
+# Example Alertmanager rules for Revalio (wire in Grafana / Prometheus).
+groups:
+  - name: revalio
+    rules:
+      - alert: ApiUpstreamErrorsHigh
+        expr: rate(revalio_upstream_errors_total[5m]) > 0.1
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: API upstream error rate elevated
+
+      - alert: IndexerMetricsDown
+        expr: up{job="revalio-indexer"} == 0
+        for: 15m
+        labels:
+          severity: critical
+        annotations:
+          summary: Indexer metrics endpoint unreachable

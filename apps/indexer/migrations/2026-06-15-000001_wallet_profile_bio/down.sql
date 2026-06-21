@@ -1,0 +1,1 @@
+ALTER TABLE wallet_profiles DROP COLUMN IF EXISTS bio;

@@ -1,0 +1,47 @@
+<!-- @dsCard group="Components" viewport="700x230" name="Buttons" subtitle="Primary / accent / outline / ghost + bracket CTA" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; background: var(--bg-canvas); }
+  #root { padding: 26px 28px; }
+  .grp { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+  .grp:last-child { margin-bottom: 0; }
+</style>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Button, BracketButton } = window.HiroDesignSystem_318aec;
+  function Demo() {
+    return (
+      <div>
+        <div className="grp">
+          <Button variant="primary" arrow>Start coding</Button>
+          <Button variant="accent">Deploy contract</Button>
+          <Button variant="secondary">View docs</Button>
+          <Button variant="ghost">Cancel</Button>
+          <Button variant="primary" disabled>Disabled</Button>
+        </div>
+        <div className="grp">
+          <Button size="sm" variant="secondary">Small</Button>
+          <Button size="md" variant="secondary">Medium</Button>
+          <Button size="lg" variant="secondary">Large</Button>
+        </div>
+        <div className="grp">
+          <BracketButton filled>Subscribe</BracketButton>
+          <BracketButton>Read the guide</BracketButton>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

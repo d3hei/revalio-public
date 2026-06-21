@@ -1,0 +1,17 @@
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400&display=swap");
+
+:root {
+  --font-sans: "Satoshi", system-ui, -apple-system, sans-serif;
+}
+
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

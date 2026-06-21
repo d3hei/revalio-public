@@ -1,0 +1,15 @@
+{
+  "name": "revalio-grant-video",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Automated, cinematic walkthrough recorder for the Revalio DeepSurge grant demo video.",
+  "scripts": {
+    "record": "node record.mjs",
+    "plan": "node record.mjs --plan",
+    "install:browser": "playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}

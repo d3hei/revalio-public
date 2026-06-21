@@ -1,0 +1,24 @@
+<!-- @dsCard group="Brand" viewport="700x180" name="Logo" subtitle="Wordmark + H mark (typographic stand-in — see CAVEATS)" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--bg-canvas); font-family: var(--font-display); }
+  .wrap { padding: 28px 32px; display: flex; gap: 40px; align-items: center; }
+  .mark { width: 64px; height: 64px; background: var(--hiro-ink); color: var(--hiro-white); border-radius: var(--radius-sm); display: grid; place-items: center; font-weight: 700; font-size: 40px; letter-spacing: -0.04em; }
+  .word { font-weight: 700; font-size: 52px; letter-spacing: -0.04em; color: var(--text-strong); }
+  .onv { background: var(--accent); }
+  .grp { display: flex; gap: 18px; align-items: center; }
+  .cap { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-faint); margin-top: 6px; }
+  .col { display:flex; flex-direction: column; align-items: center; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="col"><div class="grp"><div class="mark">H</div><span class="word">Hiro</span></div><div class="cap">Primary lockup</div></div>
+    <div class="col"><div class="mark onv">H</div><div class="cap">Mark · violet</div></div>
+  </div>
+</body>
+</html>

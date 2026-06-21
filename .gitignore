@@ -1,0 +1,33 @@
+# Node
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+.pnpm-store/
+
+# Rust
+/target/
+apps/indexer/target/
+**/*.rs.bk
+
+# Env / secrets
+.env
+.env.local
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# Diagnostics
+_diag.txt
+
+# Docker volumes (if mounted locally)
+/.data/

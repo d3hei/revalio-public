@@ -1,0 +1,30 @@
+<!-- @dsCard group="Type" viewport="700x230" name="Mono & Labels" subtitle="Space Mono — eyebrows, UI chrome, code & comments" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--bg-canvas); font-family: var(--font-mono); }
+  .wrap { padding: 22px 28px; display: flex; flex-direction: column; gap: 16px; }
+  .eyebrow { font-size: 11px; letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-muted); }
+  .label { font-size: 13px; letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--text-strong); }
+  .code { font-size: 14px; color: var(--text-strong); }
+  .code .cmt { color: var(--text-faint); }
+  .code .fn { color: var(--accent); }
+  .row { display:flex; gap: 24px; align-items: baseline; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="row">
+      <span class="eyebrow">/ Tools</span>
+      <span class="eyebrow">API Reference</span>
+      <span class="label">[ Subscribe ]</span>
+    </div>
+    <div class="code">$ <span class="fn">clarinet</span> contract new counter <span class="cmt"># scaffold a clarity contract</span></div>
+    <div class="code">├── chainhook <span class="cmt"># react to onchain events</span></div>
+    <div class="code">└── stacks-api <span class="cmt"># query the blockchain</span></div>
+  </div>
+</body>
+</html>

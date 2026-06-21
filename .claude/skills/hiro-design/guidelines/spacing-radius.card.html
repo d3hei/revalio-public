@@ -1,0 +1,25 @@
+<!-- @dsCard group="Spacing" viewport="700x170" name="Radius & Borders" subtitle="Mostly square — small radii, hairline + bold borders" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--bg-canvas); font-family: var(--font-mono); }
+  .wrap { padding: 24px 28px; display: flex; gap: 22px; align-items: flex-start; }
+  .item { display:flex; flex-direction: column; gap: 10px; align-items: center; }
+  .box { width: 72px; height: 64px; background: var(--hiro-paper); border: 1px solid var(--border-subtle); }
+  .lbl { font-size: 10px; color: var(--text-muted); letter-spacing: var(--ls-label); text-transform: uppercase; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="item"><div class="box" style="border-radius:0"></div><div class="lbl">none</div></div>
+    <div class="item"><div class="box" style="border-radius:2px"></div><div class="lbl">xs · 2</div></div>
+    <div class="item"><div class="box" style="border-radius:4px"></div><div class="lbl">sm · 4</div></div>
+    <div class="item"><div class="box" style="border-radius:6px"></div><div class="lbl">md · 6</div></div>
+    <div class="item"><div class="box" style="border-radius:10px"></div><div class="lbl">lg · 10</div></div>
+    <div class="item"><div class="box" style="border:2px solid var(--border-strong);border-radius:4px"></div><div class="lbl">bold 2px</div></div>
+  </div>
+</body>
+</html>

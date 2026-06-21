@@ -1,0 +1,14 @@
+/* ============================================================
+   Hiro — Webfonts
+   ------------------------------------------------------------
+   NOTE: Hiro's production site uses licensed proprietary
+   typefaces. The exact font binaries were not accessible from
+   this environment, so the closest high-quality open substitutes
+   are loaded from Google Fonts:
+     - Space Grotesk  → display & UI sans (geometric grotesque)
+     - Space Mono     → labels, code, terminal & file-tree motifs
+   These are a coherent, dev-credible pairing that matches Hiro's
+   retro-terminal voice. Swap in the real binaries when available.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
