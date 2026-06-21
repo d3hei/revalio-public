@@ -123,10 +123,3 @@ Revalio is evolving beyond a portfolio tracker into a wallet intelligence platfo
 The long-term goal is to provide a complete understanding of wallet behavior, portfolio composition, protocol exposure and ecosystem activity through a single interface.
 
 ---
-
-## License
-
-MIT
-
-```
-```
